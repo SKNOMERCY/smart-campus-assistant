@@ -2,35 +2,35 @@ import faqDataset from "../data/faqs.json";
 import { detectSmallTalkIntent, fuzzySimilarity, normalizeText, uniqueTokens } from "../utils/textProcessing";
 
 const FALLBACK_RESPONSES = [
-  "I couldn't confidently match that to a saved campus or city FAQ yet. Try rephrasing it or tap one of the suggested questions below.",
-  "That question is a little outside my current knowledge base. I can still help if you ask it with terms like admissions, hostel, transport, fees, or placements.",
+  "I couldn't confidently match that to a VIT Vellore FAQ yet. Try rephrasing it or tap one of the suggested questions below.",
+  "That question is a little outside my current VIT Vellore knowledge base. I can still help if you ask it with terms like admissions, hostel, transport, fees, or placements.",
   "I want to avoid guessing. If you reword the question with a key topic or choose a suggested FAQ, I can answer more reliably."
 ];
 
 const DEFAULT_SUGGESTIONS = [
-  "What are the admission requirements?",
-  "How do I reach the campus by public transport?",
-  "Are hostel rooms available for first-year students?",
-  "What scholarships are offered?",
-  "Where is the registrar office?"
+  "How do UG admissions work at VIT Vellore?",
+  "How do I reach VIT from Katpadi station?",
+  "Are hostel rooms available at VIT Vellore?",
+  "What scholarships are available at VIT?",
+  "How can I contact the admissions office?"
 ];
 
 const SPECIAL_RESPONSES = {
   greeting: {
     answer:
-      "Hello! I can help with admissions, academics, campus life, placements, and city essentials for Northbridge College in Riverton City.",
+      "Hello! I can help with admissions, academics, campus life, placements, and travel basics for VIT Vellore.",
     suggestions: DEFAULT_SUGGESTIONS
   },
   thanks: {
-    answer: "Happy to help. If you want, I can also suggest more FAQs about campus life, fees, or city transport.",
+    answer: "Happy to help. If you want, I can also suggest more FAQs about VIT hostels, fees, student services, or transport.",
     suggestions: [
-      "What are the library hours?",
-      "Tell me about placement support",
-      "What is the campus Wi-Fi process?"
+      "Tell me about the VIT central library",
+      "Tell me about placement support at VIT",
+      "Is campus Wi-Fi available at VIT Vellore?"
     ]
   },
   goodbye: {
-    answer: "You can return anytime for quick answers about Northbridge College and Riverton City. Have a great day.",
+    answer: "You can return anytime for quick answers about VIT Vellore and campus life in Vellore. Have a great day.",
     suggestions: DEFAULT_SUGGESTIONS.slice(0, 3)
   }
 };

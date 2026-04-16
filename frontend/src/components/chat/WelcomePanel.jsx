@@ -11,11 +11,11 @@ export function WelcomePanel({ brand, featuredQuestions, onAskQuestion }) {
           </div>
           <div>
             <h2 className="font-display text-3xl font-semibold leading-tight text-text">
-              Ask faster. Navigate campus and city life with confidence.
+              Ask faster. Navigate VIT Vellore with confidence.
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-7 text-muted md:text-base">
               {brand.assistantName} is built to handle the most common questions students ask about
-              admissions, campus services, and getting around {brand.cityName}.
+              admissions, campus services, hostels, placements, and getting around {brand.cityName}.
             </p>
           </div>
 
@@ -27,7 +27,7 @@ export function WelcomePanel({ brand, featuredQuestions, onAskQuestion }) {
               <div className="flex items-start gap-3">
                 <Building2 className="mt-1 h-5 w-5 text-accent-strong" />
                 <p className="text-sm leading-6 text-muted">
-                  Check requirements, services, placements, hostel details, and daily academic info.
+                  Check admissions, services, placements, hostel details, and everyday academic info.
                 </p>
               </div>
             </div>
@@ -39,7 +39,7 @@ export function WelcomePanel({ brand, featuredQuestions, onAskQuestion }) {
               <div className="flex items-start gap-3">
                 <MapPinned className="mt-1 h-5 w-5 text-accent-strong" />
                 <p className="text-sm leading-6 text-muted">
-                  Get quick answers on transport, stations, cafes, airport access, and weekend plans.
+                  Get quick answers on Katpadi access, buses, airport travel, and moving around Vellore.
                 </p>
               </div>
             </div>

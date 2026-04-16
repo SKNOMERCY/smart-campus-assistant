@@ -19,7 +19,7 @@ export function Header({ brand, theme, onToggleTheme, onExportConversation, onCl
       <div className="space-y-2">
         <div className="inline-flex items-center gap-2 rounded-full border border-accent/15 bg-accent-soft/70 px-3 py-1 text-xs font-bold uppercase tracking-[0.24em] text-accent-strong">
           <Sparkles className="h-3.5 w-3.5" />
-          Student Info Assistant
+          VIT Student Assistant
         </div>
         <div>
           <h1 className="font-display text-2xl font-semibold text-text md:text-3xl">

@@ -15,7 +15,7 @@ export function buildWelcomeMessage(brand = APP_BRAND) {
   return createMessage({
     role: "bot",
     type: "welcome",
-    text: `Welcome to ${brand.assistantName}. Ask about admissions, academics, campus life, placements, or Riverton City essentials.`,
+    text: `Welcome to ${brand.assistantName}. Ask about admissions, academics, hostel life, placements, or getting around Vellore.`,
     meta: {
       category: "Welcome"
     }
@@ -46,7 +46,7 @@ export function downloadTranscript(messages, brand = APP_BRAND) {
   const anchor = document.createElement("a");
 
   anchor.href = url;
-  anchor.download = "northbridge-chat-transcript.txt";
+  anchor.download = "vit-vellore-chat-transcript.txt";
   anchor.click();
 
   URL.revokeObjectURL(url);
