@@ -5,7 +5,11 @@ import { APP_BRAND, INITIAL_SUGGESTIONS, MAX_INPUT_LENGTH, STORAGE_KEYS } from "
 import { buildWelcomeMessage, createMessage, downloadTranscript } from "../utils/chat";
 
 function restoreSession() {
-  const saved = sessionStorage.getItem(STORAGE_KEYS.session);
+  if (typeof window === "undefined" || !window.sessionStorage) {
+    return null;
+  }
+
+  const saved = window.sessionStorage.getItem(STORAGE_KEYS.session);
 
   if (!saved) {
     return null;
@@ -67,7 +71,11 @@ export function useChatbot() {
   }, []);
 
   useEffect(() => {
-    sessionStorage.setItem(
+    if (typeof window === "undefined" || !window.sessionStorage) {
+      return;
+    }
+
+    window.sessionStorage.setItem(
       STORAGE_KEYS.session,
       JSON.stringify({
         messages,
@@ -127,11 +135,6 @@ export function useChatbot() {
     setIsTyping(true);
 
     const startedAt = Date.now();
-    const warmupNoticeTimer = globalThis.setTimeout(() => {
-      setStatusMessage(
-        "The Render backend may be waking up. The first reply can take a little longer than usual."
-      );
-    }, 6000);
 
     try {
       const response = await sendChatMessage(message);
@@ -156,16 +159,15 @@ export function useChatbot() {
       setSuggestions(response.suggestions?.length ? response.suggestions : INITIAL_SUGGESTIONS);
       setUiError("");
     } catch (error) {
-      setUiError(error.message || "I ran into a server issue while processing that question.");
+      setUiError(error.message || "I ran into an issue while searching the built-in FAQ library.");
       const botMessage = createMessage({
         role: "bot",
         type: "error",
-        text: error.message || "I ran into a server issue while processing that question."
+        text: error.message || "I ran into an issue while searching the built-in FAQ library."
       });
 
       setMessages((currentMessages) => [...currentMessages, botMessage]);
     } finally {
-      globalThis.clearTimeout(warmupNoticeTimer);
       setStatusMessage("");
       setIsTyping(false);
     }
