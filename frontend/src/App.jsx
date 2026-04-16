@@ -22,6 +22,7 @@ function App() {
     isTyping,
     isLoading,
     uiError,
+    statusMessage,
     hasUserMessages,
     sendMessage,
     clearConversation,
@@ -62,7 +63,12 @@ function App() {
           />
 
           <SuggestionChips suggestions={suggestions} onAskQuestion={sendMessage} />
-          <Composer onSend={sendMessage} disabled={isTyping} uiError={uiError} />
+          <Composer
+            onSend={sendMessage}
+            disabled={isTyping}
+            uiError={uiError}
+            statusMessage={statusMessage}
+          />
         </main>
       </div>
     </div>

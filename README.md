@@ -99,6 +99,17 @@ Create `frontend/.env` from `frontend/.env.example`.
 
 Default values already point the frontend to `http://localhost:5000/api`.
 
+## Deployment Configuration
+
+For Vercel:
+
+- Set `VITE_API_BASE_URL=https://smart-campus-assistant-d8i1.onrender.com/api`
+
+For Render:
+
+- Set `FRONTEND_ORIGIN=https://smart-campus-assistant-kappa.vercel.app,http://localhost:5173,http://127.0.0.1:5173`
+- Optional health check path: `/api/health`
+
 ### 3. Start the application
 
 Run both frontend and backend together:

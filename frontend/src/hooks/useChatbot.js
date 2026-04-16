@@ -33,6 +33,7 @@ export function useChatbot() {
   const [isTyping, setIsTyping] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [uiError, setUiError] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -103,6 +104,10 @@ export function useChatbot() {
   const hasUserMessages = messages.some((message) => message.role === "user");
 
   async function sendMessage(rawMessage) {
+    if (isTyping) {
+      return;
+    }
+
     const message = rawMessage.trim();
 
     if (!message) {
@@ -116,11 +121,17 @@ export function useChatbot() {
     }
 
     setUiError("");
+    setStatusMessage("");
     const userMessage = createMessage({ role: "user", text: message });
     setMessages((currentMessages) => [...currentMessages, userMessage]);
     setIsTyping(true);
 
     const startedAt = Date.now();
+    const warmupNoticeTimer = globalThis.setTimeout(() => {
+      setStatusMessage(
+        "The Render backend may be waking up. The first reply can take a little longer than usual."
+      );
+    }, 6000);
 
     try {
       const response = await sendChatMessage(message);
@@ -143,7 +154,9 @@ export function useChatbot() {
 
       setMessages((currentMessages) => [...currentMessages, botMessage]);
       setSuggestions(response.suggestions?.length ? response.suggestions : INITIAL_SUGGESTIONS);
+      setUiError("");
     } catch (error) {
+      setUiError(error.message || "I ran into a server issue while processing that question.");
       const botMessage = createMessage({
         role: "bot",
         type: "error",
@@ -152,6 +165,8 @@ export function useChatbot() {
 
       setMessages((currentMessages) => [...currentMessages, botMessage]);
     } finally {
+      globalThis.clearTimeout(warmupNoticeTimer);
+      setStatusMessage("");
       setIsTyping(false);
     }
   }
@@ -160,6 +175,7 @@ export function useChatbot() {
     setMessages([buildWelcomeMessage(faqDirectory.meta || APP_BRAND)]);
     setSuggestions(faqDirectory.meta?.welcomePrompts || INITIAL_SUGGESTIONS);
     setUiError("");
+    setStatusMessage("");
   }
 
   function exportConversation() {
@@ -180,6 +196,7 @@ export function useChatbot() {
     isTyping,
     isLoading,
     uiError,
+    statusMessage,
     hasUserMessages,
     sendMessage,
     clearConversation,

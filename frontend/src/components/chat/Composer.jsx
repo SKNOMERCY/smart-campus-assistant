@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 
 import { MAX_INPUT_LENGTH } from "../../data/constants";
 
-export function Composer({ onSend, disabled, uiError }) {
+export function Composer({ onSend, disabled, uiError, statusMessage }) {
   const [draft, setDraft] = useState("");
   const textareaRef = useRef(null);
 
@@ -71,7 +71,7 @@ export function Composer({ onSend, disabled, uiError }) {
 
         <div className="mt-3 flex flex-col gap-2 text-xs sm:flex-row sm:items-center sm:justify-between">
           <div className={`${uiError ? "text-rose-500" : "text-muted"}`}>
-            {uiError || "Press Enter to send, Shift + Enter for a new line."}
+            {uiError || statusMessage || "Press Enter to send, Shift + Enter for a new line."}
           </div>
           <div className="font-semibold text-muted">{draft.length}/{MAX_INPUT_LENGTH}</div>
         </div>
